@@ -1,6 +1,7 @@
 // console.log("Hello World");
+
 // console.log(true);
-// console.log(123);
+// console.log("123");
 
 // //var = variable -  you can change it
 
@@ -18,22 +19,24 @@
 
 // //the name of a variable can have letter, numbers, _ or $
 // //but it cannot start with a number
-
+// var something_Else_Other = 17;
 // //
 
 // //let - variables that are limited in scope
 // // works the same as var
-// let somethingNew;
+let somethingNew = 30;
+console.log(somethingNew - 1);
+
 // let newName = "Sam Johnson";
 // console.log(newName);
 // newName = "Something Else";
 // console.log(newName);
 
 // //const = constant, cannot be reassigned later
-// const theBest = "Michael Jordan";
-// console.log(theBest);
-// // theBest = "LeBron James";
-// // console.log(theBest);
+const theBest = "Michael Jordan";
+console.log(theBest);
+theBest = "LeBron James";
+console.log(theBest);
 
 // // const must also be initialized with some value, can't just be declared
 // const newThing;
