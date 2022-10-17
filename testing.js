@@ -1,20 +1,21 @@
 // console.log("Hello World");
 
 // console.log(true);
-// console.log("123");
+// console.log(123);
 
 // //var = variable -  you can change it
 
-// var someName = "John Ham";
+var someName = "John Ham";
 // console.log(someName);
-// someName = "Tim Apple";
+
+someName = "Tim Apple";
 // console.log(someName);
 
 // //initialize a variable
-// var temp;
+var temp;
 // console.log(temp);
 
-// temp = 45;
+temp = 45;
 // console.log(temp);
 
 // //the name of a variable can have letter, numbers, _ or $
@@ -25,18 +26,18 @@
 // //let - variables that are limited in scope
 // // works the same as var
 let somethingNew = 30;
-console.log(somethingNew - 1);
+// console.log(somethingNew);
 
-// let newName = "Sam Johnson";
+let newName = "Sam Johnson";
 // console.log(newName);
-// newName = "Something Else";
+newName = "Something Else";
 // console.log(newName);
 
 // //const = constant, cannot be reassigned later
 const theBest = "Michael Jordan";
-console.log(theBest);
-theBest = "LeBron James";
-console.log(theBest);
+// console.log(theBest);
+// theBest = "LeBron James";
+// console.log(theBest);
 
 // // const must also be initialized with some value, can't just be declared
 // const newThing;
@@ -60,51 +61,76 @@ console.log(theBest);
 // Etc.
 
 // //Strings
-// const colors = "blue";
+const colors = "blue run grass ";
+// console.log(colors);
 // console.log(typeof colors);
 
 // //numbers
-// const age = 34;
-// console.log(typeof age);
+const thisIsMyVariableName = "45";
+var age2 = thisIsMyVariableName + 56;
+// console.log(typeof thisIsMyVariableName);
+// console.log(age2);
 
 // //booleans
-// const hasCar = true;
+const number3 = 45;
+const hasCar = !(5 == 5);
+// console.log(hasCar);
 // console.log(typeof hasCar);
 
 // // null
-// const carType = null;
+const carType = null;
 // console.log(typeof carType);
+// console.log(carType);
 
 // //undefined
-// let testing;
+let testing;
 // console.log(typeof testing);
 
 // //symbol
-// const symb = Symbol();
+const symb = Symbol();
 // console.log(typeof symb);
+// console.log(symb);
 
 // Reference Types - objects
 
 // //Arrays - List of things
 
-// const dogBreeds = ["Geraman Shepherd", "Golden Retreiver", "Chihuahua", 45, 23];
+const dogBreeds = [
+  "Geraman Shepherd",
+  "Golden Retreiver",
+  "aple",
+  76,
+  12,
+  "Chihuahua",
+  45,
+];
 // console.log(typeof dogBreeds);
 // console.log(dogBreeds);
 // console.log(dogBreeds[1]);
 // console.log(typeof dogBreeds[1]);
 // console.log(typeof dogBreeds[3]);
+// console.log(dogBreeds.length);
+// console.log(dogBreeds[dogBreeds.length - 1]);
 
 // //Object Literals
-// const person = {
-//   name: "John Smith",
-//   age: 23,
-//   height: 6.4,
-// };
+const nameOfMyObject = {
+  name: "John Smith",
+  age: 23,
+  height: 6.4,
+  smart: true,
+  gobbbbbeeeee: 34.78,
+  dogs: ["Geraman Shepherd", "Golden Retreiver", "Chihuahua"],
+};
 
-// console.log(typeof person);
-// console.log(person);
-// console.log(person.name);
-// console.log(typeof person.name);
+console.log(typeof nameOfMyObject);
+console.log(nameOfMyObject);
+console.log(nameOfMyObject.name);
+console.log(typeof nameOfMyObject.name);
+console.log(nameOfMyObject.gobbbbbeeeee);
+console.log(typeof nameOfMyObject.gobbbbbeeeee);
+console.log(nameOfMyObject.smart);
+console.log(typeof nameOfMyObject.smart);
+console.log(nameOfMyObject.dogs);
 
 // //Date
 // const today = new Date();
