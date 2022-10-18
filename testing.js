@@ -106,33 +106,109 @@ const dogBreeds = [
 ];
 // console.log(typeof dogBreeds);
 // console.log(dogBreeds);
-// console.log(dogBreeds[1]);
+// console.log(dogBreeds[8]);
 // console.log(typeof dogBreeds[1]);
 // console.log(typeof dogBreeds[3]);
 // console.log(dogBreeds.length);
 // console.log(dogBreeds[dogBreeds.length - 1]);
 
 // //Object Literals
-const nameOfMyObject = {
-  name: "John Smith",
-  age: 23,
-  height: 6.4,
-  smart: true,
-  gobbbbbeeeee: 34.78,
-  dogs: ["Geraman Shepherd", "Golden Retreiver", "Chihuahua"],
+const chairObj = {
+  numberofLegs: 4,
+  color: "Black",
+  doesItSpin: true,
+  numbrOfWheels: 4,
+  namesOfChairs: ["Hermes", "Ikea", "Staples", "Office"],
 };
 
-console.log(typeof nameOfMyObject);
-console.log(nameOfMyObject);
-console.log(nameOfMyObject.name);
-console.log(typeof nameOfMyObject.name);
-console.log(nameOfMyObject.gobbbbbeeeee);
-console.log(typeof nameOfMyObject.gobbbbbeeeee);
-console.log(nameOfMyObject.smart);
-console.log(typeof nameOfMyObject.smart);
-console.log(nameOfMyObject.dogs);
+// console.log(typeof chairObj);
+// console.log(chairObj);
+// console.log(chairObj.doesItSpin);
+// console.log(typeof chairObj.doesItSpin);
+// console.log(typeof chairObj.numbrOfWheels);
+// console.log(typeof chairObj.namesOfChairs);
+// console.log(chairObj.namesOfChairs[1]);
 
 // //Date
-// const today = new Date();
+const today = new Date();
 // console.log(typeof today);
 // console.log(today);
+
+const UserObj = {
+  lastLogIn: today,
+};
+
+// console.log(UserObj.lastLogIn);
+
+const gradeOnTest = 80;
+
+if (!(gradeOnTest >= 90)) {
+  console.log("You got an A");
+} else if (gradeOnTest >= 80) {
+  console.log("You got an B");
+} else if (gradeOnTest >= 70) {
+  console.log("You got an C");
+} else if (gradeOnTest >= 60) {
+  console.log("You got an D");
+} else {
+  console.log("You got an F");
+}
+
+// Type conversions
+//from number to String
+var val = 45.5;
+val = String(val);
+val = String(true);
+val = String(false);
+val = String(new Date());
+val = String([1, 2, 3, 4, 5]);
+val = (45).toString();
+
+const something = 8923;
+val = something.toString();
+
+// console.log(val);
+// console.log(typeof val);
+
+//From String to number
+val = Number("45");
+val = Number(true);
+val = Number(false);
+val = Number(null);
+val = Number("Hello");
+val = Number([1, 2, 3, 4, 5]);
+
+// console.log(val);
+// console.log(typeof val);
+
+//Equations
+const num1 = 10;
+const num2 = 6;
+let solution;
+
+solution = num1 + num2;
+solution = num1 * num2;
+solution = num1 - num2;
+solution = num1 * num2;
+solution = num1 % num2;
+
+// console.log(solution);
+
+// Math
+solution = Math.PI;
+solution = Math.E;
+solution = Math.round(2.6);
+solution = Math.ceil(2.3); //rounds up
+solution = Math.floor(2.7); //rounds down
+solution = Math.sqrt(64);
+solution = Math.cbrt(27);
+solution = Math.abs(-67);
+solution = Math.pow(8, 3);
+//first number to the power of the second number
+solution = Math.min(2, 3, 4, 67, 1, 89, 4);
+solution = Math.max(2, 3, 4, 67, 1, 89, 4);
+solution = Math.random();
+
+//Random number from 0 to 45?
+
+console.log(solution);
