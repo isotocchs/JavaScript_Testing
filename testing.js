@@ -114,7 +114,7 @@ const dogBreeds = [
 
 // //Object Literals
 const chairObj = {
-  numberofLegs: 4,
+  numberof_Legs: 4,
   color: "Black",
   doesItSpin: true,
   numbrOfWheels: 4,
@@ -125,14 +125,14 @@ const chairObj = {
 // console.log(chairObj);
 // console.log(chairObj.doesItSpin);
 // console.log(typeof chairObj.doesItSpin);
-// console.log(typeof chairObj.numbrOfWheels);
+// console.log(chairObj.numbrOfWheels);
 // console.log(typeof chairObj.namesOfChairs);
 // console.log(chairObj.namesOfChairs[1]);
 
 // //Date
 const today = new Date();
 // console.log(typeof today);
-// console.log(today);
+// console.log(new Date());
 
 const UserObj = {
   lastLogIn: today,
@@ -141,11 +141,12 @@ const UserObj = {
 // console.log(UserObj.lastLogIn);
 
 const gradeOnTest = 80;
+const extraCredit = 50;
 
-if (!(gradeOnTest >= 90)) {
+if (gradeOnTest >= 90) {
   console.log("You got an A");
 } else if (gradeOnTest >= 80) {
-  console.log("You got an B");
+  // console.log("You got an B");
 } else if (gradeOnTest >= 70) {
   console.log("You got an C");
 } else if (gradeOnTest >= 60) {
@@ -166,38 +167,40 @@ val = (45).toString();
 
 const something = 8923;
 val = something.toString();
+// console.log(val + 23);
 
 // console.log(val);
 // console.log(typeof val);
 
 //From String to number
-val = Number("45");
-val = Number(true);
-val = Number(false);
-val = Number(null);
-val = Number("Hello");
-val = Number([1, 2, 3, 4, 5]);
+// val = Number("45");
+// val = Number(true);
+// val = Number(false);
+// val = Number(null);
+// val = Number("twenty");
+// val = Number([1, 2, 3, 4, 5]);
 
 // console.log(val);
 // console.log(typeof val);
 
 //Equations
-const num1 = 10;
-const num2 = 6;
+const num1 = 10.55;
+const num2 = 20;
 let solution;
 
-solution = num1 + num2;
-solution = num1 * num2;
-solution = num1 - num2;
-solution = num1 * num2;
-solution = num1 % num2;
+solution = num1 + num2 + 5 * 2;
+// solution = num1 * num2;
+// solution = num1 - num2;
+// solution = num1 / num2;
+// solution = num1 % num2;
 
 // console.log(solution);
 
 // Math
 solution = Math.PI;
+// console.log(Math.PI);
 solution = Math.E;
-solution = Math.round(2.6);
+solution = Math.round(num1);
 solution = Math.ceil(2.3); //rounds up
 solution = Math.floor(2.7); //rounds down
 solution = Math.sqrt(64);
@@ -210,5 +213,37 @@ solution = Math.max(2, 3, 4, 67, 1, 89, 4);
 solution = Math.random();
 
 //Random number from 0 to 45?
+// solution = Math.floor(Math.random() * 45 + 1);
+//solution = Math.floor(Math.random()*(max-min)+min)
+// console.log(solution);
 
-console.log(solution);
+// String methods
+const firstName = "John";
+const lastName = "Smith";
+
+let full = firstName + lastName;
+
+// full = "Tom";
+// full += "Great";
+
+// full = "This is 'awesome'";
+
+console.log(full);
+
+console.log(full.length);
+
+// let val2 = full.concat(" ", firstName);
+
+// val2 = full.toLowerCase;
+// val2 = full.toUpperCase;
+// val2 = full[4];
+
+// val2 = full.indexOf("i");
+// val2 = full.indexOf("i", 4);
+// val2 = full.lastIndexOf("i");
+
+// val2 = full.substring(0, 4);
+
+// val2 = full.split(" ");
+
+// console.log(val2);
