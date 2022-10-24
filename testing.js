@@ -221,29 +221,59 @@ solution = Math.random();
 const firstName = "John";
 const lastName = "Smith";
 
-let full = firstName + lastName;
+let full = firstName + " " + lastName;
 
-// full = "Tom";
-// full += "Great";
+full = "Tom";
+full += " Great";
 
-// full = "This is 'awesome'";
+full = 'This is "awesome"';
 
-console.log(full);
+// console.log(full);
 
-console.log(full.length);
+// console.log(full.length);
 
-// let val2 = full.concat(" ", firstName);
+let val2 = full.concat(" ", firstName);
+val2 = full + " " + firstName;
 
-// val2 = full.toLowerCase;
-// val2 = full.toUpperCase;
-// val2 = full[4];
+val2 = full.toLowerCase();
+val2 = full.toUpperCase();
 
-// val2 = full.indexOf("i");
-// val2 = full.indexOf("i", 4);
+val2 = full[full.length - 1];
+
+val2 = full.indexOf(" is");
+val2 = full.indexOf(" is", 6);
 // val2 = full.lastIndexOf("i");
 
 // val2 = full.substring(0, 4);
 
 // val2 = full.split(" ");
 
-// console.log(val2);
+console.log(val2);
+
+// for loops
+for (let i = 0; i < 10; i++) {
+  if (i == 2) {
+    console.log(i + " is my favorite numebr");
+    continue;
+    //exits out of the current loop
+    //and goes to the next one.
+  }
+  if (i == 5) {
+    break;
+    //stops the loop entirely
+  }
+  console.log(i);
+}
+// while loop
+while (i < 10) {
+  console.log(i);
+  i++;
+  //Make sure you have a condition where the loop ends
+}
+
+//do while loop
+let i = 1;
+do {
+  console.log(i);
+  i++;
+} while (i < 10);
