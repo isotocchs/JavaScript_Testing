@@ -223,54 +223,63 @@ const lastName = "Smith";
 
 let full = firstName + " " + lastName;
 
-full = "Tom";
-full += " Great";
+// full = "Tom";
+full += " is Great";
 
-full = 'This is "awesome"';
+full = "This is 'awesome'";
 
-// console.log(full)
+// console.log(full);
 // console.log(full.length);
 let val2 = full.concat(" ", firstName);
 val2 = full + " " + firstName;
 val2 = full.toLowerCase();
+val2 = full.charAt(0).toUpperCase() + full.slice(1);
 val2 = full.toUpperCase();
-
 val2 = full[full.length - 1];
 
 val2 = full.indexOf("i");
-val2 = full.indexOf("is", 6);
+val2 = full.indexOf(" is", 5);
 val2 = full.lastIndexOf("i");
 
-val2 = full.substring(0, 7);
+val2 = full.substring(10, 17);
 
-val2 = full.split("s");
+val2 = full.split(" ");
+val2 = full.slice(4);
 
 // console.log(val2);
 
 // for loops
-for (let i = 0; i < 10; i++) {
+for (let i = 10; i > 0; i--) {
   // if (i == 2) {
-  //   console.log(i + " is my favorite numebr");
+  //   // console.log(i);
   //   continue;
   //   //exits out of the current loop
   //   //and goes to the next one.
   // }
   // if (i == 5) {
   //   break;
+  //   console.log(i + " is my favorite numebr");
   //   //stops the loop entirely
   // }
-  console.log(i);
+  // console.log(i + " is my favorite numebr");
 }
-// // while loop
-// while (i < 10) {
+
+let original = "the dog is brown";
+let reverse = "";
+
+// console.log(original[original.length - 1]);
+
+// while loop
+// let i = 10;
+// while (i > 10) {
 //   console.log(i);
-//   i++;
+//   i--;
 //   //Make sure you have a condition where the loop ends
 // }
 
-// //do while loop
-// let i = 1;
-// do {
-//   console.log(i);
-//   i++;
-// } while (i < 10);
+//do while loop
+let i = 10;
+do {
+  console.log(i);
+  i--;
+} while (i > 10);
