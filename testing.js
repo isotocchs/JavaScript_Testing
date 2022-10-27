@@ -285,31 +285,3 @@
 // } while (i > 10);
 
 //FUNCTIONS
-function walking(input1) {
-  if (input1 == 1) {
-    console.log("He was walking");
-    console.log(input1);
-  } else if (input1 == 2) {
-    console.log("He was running");
-    console.log(input1);
-  } else {
-    console.log("He was jogging");
-    console.log(input1);
-  }
-}
-
-function cheddar() {
-  console.log("this is my favorite cheese");
-}
-
-function lazy() {
-  cheddar();
-  walking();
-}
-
-function addingStuff(a, b, c, d) {
-  addingStuff(a, b, c, d);
-  return a + b + c + d;
-}
-let addition = addingStuff(4, 5, 6, 6);
-console.log(addition);
