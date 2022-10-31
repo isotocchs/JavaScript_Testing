@@ -285,3 +285,37 @@
 // } while (i > 10);
 
 //FUNCTIONS
+// function jojo() {
+//   console.log("Cool Anime");
+//   let i = 10;
+//   do {
+//     console.log(i);
+//     i--;
+//   } while (i > 0);
+// }
+
+// function cat() {
+//   console.log("Meow");
+// }
+
+// function lazy() {
+//   jojo();
+//   cat();
+//   cat();
+//   cat();
+//   cat();
+//   cat();
+// }
+
+function addingStuff(bob, john, tim) {
+  if (john == "*") {
+    return bob * tim;
+  }
+
+  let mult = bob * tim;
+  let adding = bob + tim;
+  let div = bob / tim;
+  let sub = bob - tim;
+}
+
+let result = calculator(5, "*", 6);
