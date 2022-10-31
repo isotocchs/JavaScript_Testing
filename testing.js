@@ -307,15 +307,11 @@
 //   cat();
 // }
 
-function addingStuff(bob, john, tim) {
+function calculator(bob, john, tim) {
   if (john == "*") {
     return bob * tim;
   }
-
-  let mult = bob * tim;
-  let adding = bob + tim;
-  let div = bob / tim;
-  let sub = bob - tim;
 }
 
 let result = calculator(5, "+", 6);
+console.log(result);
