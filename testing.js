@@ -318,4 +318,4 @@ function addingStuff(bob, john, tim) {
   let sub = bob - tim;
 }
 
-let result = calculator(5, "*", 6);
+let result = calculator(5, "+", 6);
