@@ -11,14 +11,14 @@ function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
   bobContext.fillRect(tom, 50, 100, 100);
 
-  if (tom == canvas_height - 100) {
+  if (tom == canvas_width - 100) {
     direction = "negative";
   }
   if (tom == 0) {
     direction = "positive";
   }
 
-  if (tom < canvas_height - 100 && direction == "positive") {
+  if (tom < canvas_width - 100 && direction == "positive") {
     tom++;
   }
   if (tom >= 0 && direction == "negative") {
@@ -29,7 +29,7 @@ function animate() {
 }
 
 let tom = 0;
-// animate();
+animate();
 
 const playerImage = new Image();
 playerImage.src = "bat-sprite.png";
@@ -59,16 +59,16 @@ function animate2() {
     canvas_width / 4,
     canvas_height / 4
   );
-  // if (gameFrame % stagerFramesBy == 0) {
-  //   if (frameX < 3) {
-  //     frameX++;
-  //   } else {
-  //     frameX = 1;
-  //   }
-  // }
+  if (gameFrame % stagerFramesBy == 0) {
+    if (frameX < 3) {
+      frameX++;
+    } else {
+      frameX = 1;
+    }
+  }
 
-  // gameFrame++;
+  gameFrame++;
   requestAnimationFrame(animate2);
 }
 
-animate2();
+// animate2();
