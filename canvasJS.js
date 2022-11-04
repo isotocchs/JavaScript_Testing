@@ -36,29 +36,29 @@ playerImage.src = "bat-sprite.png";
 
 const spriteWidth = 128 / 4;
 const spriteHeight = 128 / 4;
-// let frameX = 1;
-// let frameY = 1;
-// let gameFrame = 0;
-// const stagerFramesBy = 10;
+let frameX = 1;
+let frameY = 1;
+let gameFrame = 0;
+const stagerFramesBy = 10;
 
 function animate2() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
-  bobContext.drawImage(playerImage, 0, 0);
+  // bobContext.drawImage(playerImage, 0, 0);
 
   //bobContext.drawImage(playerImage, source_x, source_y,
   // source_w, source_h, destination_x,destination_y,destination_w,destination_h);
-
-  // bobContext.drawImage(
-  //   playerImage,
-  //   spriteWidth,
-  //   spriteHeight,
-  //   spriteWidth * 2,
-  //   spriteHeight,
-  //   0,
-  //   0,
-  //   canvas_width / 4,
-  //   canvas_height / 4
-  // );
+  // bobContext.scale(-1, 1);
+  bobContext.drawImage(
+    playerImage,
+    spriteWidth * frameX,
+    spriteHeight * frameY,
+    spriteWidth,
+    spriteHeight,
+    0,
+    0,
+    canvas_width / 4,
+    canvas_height / 4
+  );
   // if (gameFrame % stagerFramesBy == 0) {
   //   if (frameX < 3) {
   //     frameX++;
