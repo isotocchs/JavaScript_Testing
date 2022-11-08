@@ -48,30 +48,23 @@ function animate2() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
   //bobContext.drawImage(playerImage, source_x, source_y,
   // source_w, source_h, destination_x,destination_y,destination_w,destination_h);
-  bobContext.scale(-1, 1);
+  // bobContext.scale(-1, 1);
   bobContext.drawImage(
     playerImage,
     spriteWidth * frameX,
     spriteHeight,
     spriteWidth,
     spriteHeight,
+    300,
     0,
-    0,
-    canvas_width / -4,
+    canvas_width / 4,
     canvas_height / 4
   );
   if (gameFrame % stagerFramesBy == 0) {
-    if (frameX == 3) {
-      direction = "backwards";
-    }
-    if (frameX == 1) {
-      direction = "forward";
-    }
-    if (frameX <= 3 && direction == "forward") {
+    if (frameX < 3) {
       frameX++;
-    }
-    if (frameX >= 1 && direction == "backwards") {
-      frameX--;
+    } else {
+      frameX = 1;
     }
   }
 
