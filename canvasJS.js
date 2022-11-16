@@ -33,40 +33,116 @@ function animate() {
 
 // animate();
 
-const playerImage = new Image();
+let playerImage = new Image();
 playerImage.src = "bat-sprite.png";
+let spriteWidthBat = 128 / 4;
+let spriteHeightBat = 128 / 4;
+let frameXBat = 1;
+let frameYBat = 1;
 
-const spriteWidth = 128 / 4;
-const spriteHeight = 128 / 4;
-let frameX = 1;
-let frameY = 1;
+let knightRun = new Image();
+knightRun.src = "Knight/noBKG_KnightRun_strip.png";
+let knightRunFrameX = 0;
+let knightRunFrameY = 0;
+let knightRunMaxFrame = 7;
+let knightRunWidth = 768 / 8;
+let knightRunHeight = 64;
+
+let knightAttack = new Image();
+knightAttack.src = "Knight/noBKG_KnightAttack_strip.png";
+let knightAttackFrameX = 0;
+let knightAttackFrameY = 0;
+let knightAttackMaxFrame = 21;
+let knightAttackWidth = 3168 / 22;
+let knightAttackHeight = 64;
+
+let spriteWidth;
+let spriteHeight;
+let sprite;
+let frameX;
+let frameY;
 let gameFrame = 0;
-const stagerFramesBy = 10;
-let directionOfSprite;
+let stagerFramesBy = 5;
+let directionOfSprite = 1;
 
 function animate2() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
-  //bobContext.drawImage(playerImage, source_x, source_y,
-  // source_w, source_h, destination_x,destination_y,destination_w,destination_h);
-  // bobContext.scale(-1, 1);
-  bobContext.drawImage(
-    playerImage,
-    spriteWidth * frameX,
-    spriteHeight,
-    spriteWidth,
-    spriteHeight,
-    300,
-    0,
-    canvas_width / 4,
-    canvas_height / 4
-  );
+
   if (gameFrame % stagerFramesBy == 0) {
-    if (frameX < 3) {
-      frameX++;
+    if (knightRunFrameX < knightRunMaxFrame) {
+      sprite = knightRun;
+      spriteWidth = knightRunWidth;
+      spriteHeight = knightRunHeight;
+      knightRunFrameX++;
+      frameX = knightRunFrameX;
+      frameY = knightRunFrameY;
     } else {
-      frameX = 1;
+      if (knightAttackFrameX < knightAttackMaxFrame) {
+        sprite = knightAttack;
+        spriteWidth = knightAttackWidth;
+        spriteHeight = knightAttackHeight;
+        knightAttackFrameX += 1;
+        frameX = knightAttackFrameX;
+        frameY = knightAttackFrameY;
+      } else {
+        knightAttackFrameX = 0;
+        sprite = knightRun;
+        spriteWidth = knightRunWidth;
+        spriteHeight = knightRunHeight;
+        knightRunFrameX = 0;
+        frameX = knightRunFrameX;
+        frameY = knightRunFrameY;
+      }
+    }
+
+    if (frameXBat < 3) {
+      frameXBat++;
+    } else {
+      frameXBat = 1;
     }
   }
+
+  if (tom >= canvas_width - spriteWidth) {
+    direction = "negative";
+  }
+  if (tom <= 0) {
+    direction = "positive";
+  }
+  if (tom < canvas_width && direction == "positive") {
+    tom += 2;
+    directionOfSprite = 1;
+    frameYBat = 1;
+  }
+  if (tom >= 0 && direction == "negative") {
+    tom -= 2;
+    directionOfSprite = -1;
+    frameYBat = 3;
+  }
+
+  bobContext.scale(directionOfSprite, 1);
+  bobContext.drawImage(
+    sprite,
+    spriteWidth * frameX,
+    spriteHeight * frameY,
+    spriteWidth,
+    spriteHeight,
+    tom * directionOfSprite,
+    325,
+    (canvas_width / 3.5) * directionOfSprite,
+    canvas_height / 3.5
+  );
+
+  bobContext.drawImage(
+    playerImage,
+    spriteWidthBat * frameXBat,
+    spriteHeightBat * frameYBat,
+    spriteWidthBat,
+    spriteHeightBat,
+    tom,
+    0,
+    canvas_width / 5,
+    canvas_height / 5
+  );
 
   gameFrame++;
   requestAnimationFrame(animate2);
