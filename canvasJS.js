@@ -33,6 +33,7 @@ function animate() {
 
 // animate();
 
+// Import bat image and Info
 let playerImage = new Image();
 playerImage.src = "bat-sprite.png";
 let spriteWidthBat = 128 / 4;
@@ -56,6 +57,7 @@ let knightAttackMaxFrame = 21;
 let knightAttackWidth = 3168 / 22;
 let knightAttackHeight = 64;
 
+let apple = 0;
 let spriteWidth;
 let spriteHeight;
 let sprite;
@@ -110,11 +112,13 @@ function animate2() {
   }
   if (tom < canvas_width && direction == "positive") {
     tom += 3;
+    apple++;
     directionOfSprite = 1;
     frameYBat = 1;
   }
   if (tom >= 0 && direction == "negative") {
     tom -= 3;
+    apple--;
     directionOfSprite = -1;
     frameYBat = 3;
   }
@@ -125,7 +129,7 @@ function animate2() {
     spriteHeightBat * frameYBat,
     spriteWidthBat,
     spriteHeightBat,
-    tom,
+    apple,
     0,
     canvas_width / 5,
     canvas_height / 5
