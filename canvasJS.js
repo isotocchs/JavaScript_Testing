@@ -3,6 +3,17 @@ const bob = document.getElementById("canvas1");
 const bobContext = bob.getContext("2d");
 // console.log(bobContext);
 
+var dropdown = document.getElementById("aniDrop");
+
+var playerState = dropdown.value;
+
+dropdown.addEventListener("change", function (e) {
+  playerState = e.target.value;
+  console.log(playerState);
+});
+
+console.log(playerState);
+
 const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
@@ -38,8 +49,8 @@ let playerImage = new Image();
 playerImage.src = "bat-sprite.png";
 let spriteWidthBat = 128 / 4;
 let spriteHeightBat = 128 / 4;
-let frameXBat = 1;
-let frameYBat = 1;
+let frameXBat;
+let frameYBat;
 
 let knightRun = new Image();
 knightRun.src = "Knight/noBKG_KnightRun_strip.png";
@@ -69,6 +80,21 @@ let directionOfSprite = 1;
 
 function animate2() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
+
+  switch (playerState) {
+    case "right":
+      frameYBat = 1;
+      break;
+    case "left":
+      frameYBat = 3;
+      break;
+    case "back":
+      frameYBat = 2;
+      break;
+    case "forward":
+      frameYBat = 0;
+      break;
+  }
 
   if (gameFrame % stagerFramesBy == 0) {
     if (knightRunFrameX < knightRunMaxFrame) {
@@ -114,13 +140,13 @@ function animate2() {
     tom += 3;
     apple++;
     directionOfSprite = 1;
-    frameYBat = 1;
+    // frameYBat = 1;
   }
   if (tom >= 0 && direction == "negative") {
     tom -= 3;
     apple--;
     directionOfSprite = -1;
-    frameYBat = 3;
+    // frameYBat = 3;
   }
 
   bobContext.drawImage(

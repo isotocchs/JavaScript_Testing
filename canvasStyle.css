@@ -12,3 +12,16 @@
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: 600px 600px;
 }
+
+.controls {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.controls,
+select,
+option {
+  font-size: 30px;
+}
