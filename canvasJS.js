@@ -94,6 +94,9 @@ function animate2() {
     case "forward":
       frameYBat = 0;
       break;
+    default:
+      frameYBat = 1;
+      break;
   }
 
   if (gameFrame % stagerFramesBy == 0) {

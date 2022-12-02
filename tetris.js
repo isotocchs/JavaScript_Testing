@@ -4,6 +4,16 @@ const context = canvas.getContext("2d");
 
 context.scale(20, 20);
 
+const arena = createMatrix(12, 20);
+
+const player = {
+  pos: { x: 0, y: 0 },
+
+  matrix: null,
+
+  score: 0,
+};
+
 function arenaSweep() {
   let rowCount = 1;
 
@@ -259,15 +269,15 @@ function updateScore() {
 }
 
 document.addEventListener("keydown", (event) => {
-  if (event.keyCode === 37) {
+  if (event.code == ArrowRight) {
     playerMove(-1);
-  } else if (event.keyCode === 39) {
+  } else if (event.code == ArrowLeft) {
     playerMove(1);
-  } else if (event.keyCode === 40) {
+  } else if (event.code == ArrowLeft) {
     playerDrop();
-  } else if (event.keyCode === 81) {
+  } else if (event.code == KeyQ) {
     playerRotate(-1);
-  } else if (event.keyCode === 87) {
+  } else if (event.code == KeyW) {
     playerRotate(1);
   }
 });
@@ -289,16 +299,6 @@ const colors = [
 
   "#3877FF",
 ];
-
-const arena = createMatrix(12, 20);
-
-const player = {
-  pos: { x: 0, y: 0 },
-
-  matrix: null,
-
-  score: 0,
-};
 
 playerReset();
 
