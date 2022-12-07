@@ -7,6 +7,7 @@ const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
 const backgroundImg = new Image();
+backgroundImg.src = "background.jpg";
 
 var keyPressed = "none";
 
