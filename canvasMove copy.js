@@ -6,6 +6,8 @@ const bobContext = bob.getContext("2d");
 const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
+const backgroundImg = new Image();
+
 var keyPressed = "none";
 
 window.addEventListener("keydown", function (e) {
