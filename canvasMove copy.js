@@ -6,9 +6,6 @@ const bobContext = bob.getContext("2d");
 const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
-const backgroundImg = new Image();
-backgroundImg.src = "background.jpg";
-
 var keyPressed = "none";
 
 window.addEventListener("keydown", function (e) {
@@ -46,6 +43,13 @@ let stagerFramesBy = 10;
 let xMove = canvas_width / 2;
 let yMove = canvas_height / 2;
 
+const backgroundImg = new Image();
+backgroundImg.src = "background.jpg";
+
+let xBack1 = 0;
+let xBack2 = backgroundImg.width;
+let xBack3 = -backgroundImg.width;
+
 function animate1() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
 
@@ -71,11 +75,21 @@ function animate1() {
   if (keyPressed === "ArrowLeft" && xMove >= 0) {
     xMove -= 3;
     frameYBat = 3;
+    xBack1 += 3;
+    xBack2 += 3;
+    xBack3 += 3;
   }
   if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
     xMove += 3;
     frameYBat = 1;
+    xBack1 -= 3;
+    xBack2 -= 3;
+    xBack3 -= 3;
   }
+
+  bobContext.drawImage(backgroundImg, xBack1, 0, canvas_width, canvas_height);
+  bobContext.drawImage(backgroundImg, xBack2, 0, canvas_width, canvas_height);
+  bobContext.drawImage(backgroundImg, xBack3, 0, canvas_width, canvas_height);
 
   bobContext.drawImage(
     playerImage,
