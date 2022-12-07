@@ -8,6 +8,10 @@ const canvas_height = (bob.height = 600);
 
 var keyPressed = "none";
 
+// window.addEventListener("keydown", function (e) {
+//   console.log(e.key);
+// });
+
 window.addEventListener("keydown", function (e) {
   if (e.key === "ArrowUp") {
     keyPressed = e.key;
@@ -30,6 +34,7 @@ let frameXBat = 1;
 let frameYBat = 1;
 let gameFrame = 0;
 let stagerFramesBy = 10;
+
 let xMove = canvas_width / 2;
 let yMove = canvas_height / 2;
 
