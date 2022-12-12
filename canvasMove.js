@@ -40,15 +40,17 @@ let frameXBat = 1;
 let frameYBat = 1;
 let gameFrame = 0;
 let stagerFramesBy = 10;
-let xMove = canvas_width / 2;
-let yMove = canvas_height / 2;
+let xMove = canvas_width / 2 - canvas_width / 5;
+let yMove = canvas_height / 2 - canvas_width / 5;
 
-const backgroundImg = new Image();
+let backgroundImg = new Image();
 backgroundImg.src = "background.jpg";
 
 let xBack1 = 0;
-let xBack2 = backgroundImg.width;
-let xBack3 = -backgroundImg.width;
+
+let xBack2 = canvas_width;
+
+let xBack3 = -canvas_width;
 
 function animate1() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
@@ -73,21 +75,37 @@ function animate1() {
     frameYBat = 0;
   }
   if (keyPressed === "ArrowLeft" && xMove >= 0) {
-    xMove -= 3;
+    // xMove -= 3;
     frameYBat = 3;
+
+    if (xBack1 >= canvas_width) {
+      xBack1 = 0;
+    }
+    if (xBack3 >= 0) {
+      xBack3 = -canvas_width;
+    }
+
     xBack1 += 3;
     xBack2 += 3;
     xBack3 += 3;
   }
   if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
-    xMove += 3;
+    // xMove += 3;
     frameYBat = 1;
+
+    if (xBack1 <= -canvas_width) {
+      xBack1 = 0;
+    }
+    if (xBack2 <= 0) {
+      xBack2 = canvas_width;
+    }
     xBack1 -= 3;
     xBack2 -= 3;
     xBack3 -= 3;
   }
 
   bobContext.drawImage(backgroundImg, xBack1, 0, canvas_width, canvas_height);
+
   bobContext.drawImage(backgroundImg, xBack2, 0, canvas_width, canvas_height);
   bobContext.drawImage(backgroundImg, xBack3, 0, canvas_width, canvas_height);
 
