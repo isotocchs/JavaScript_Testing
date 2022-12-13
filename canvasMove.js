@@ -81,6 +81,9 @@ function animate1() {
     if (xBack1 >= canvas_width) {
       xBack1 = 0;
     }
+    if (xBack2 >= canvas_width * 2) {
+      xBack2 = canvas_width;
+    }
     if (xBack3 >= 0) {
       xBack3 = -canvas_width;
     }
@@ -99,10 +102,17 @@ function animate1() {
     if (xBack2 <= 0) {
       xBack2 = canvas_width;
     }
+    if (xBack3 <= -canvas_width * 2) {
+      xBack3 = -canvas_width;
+    }
     xBack1 -= 3;
     xBack2 -= 3;
     xBack3 -= 3;
   }
+
+  // console.log("back1: " + xBack1);
+  // console.log("back2: " + xBack2);
+  // console.log("back3: " + xBack3);
 
   bobContext.drawImage(backgroundImg, xBack1, 0, canvas_width, canvas_height);
 
