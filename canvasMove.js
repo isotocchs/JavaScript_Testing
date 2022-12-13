@@ -78,15 +78,15 @@ function animate1() {
     // xMove -= 3;
     frameYBat = 3;
 
-    // if (xBack1 >= canvas_width) {
-    //   xBack1 = 0;
-    // }
-    // if (xBack2 >= canvas_width * 2) {
-    //   xBack2 = canvas_width;
-    // }
-    // if (xBack3 >= 0) {
-    //   xBack3 = -canvas_width;
-    // }
+    if (xBack1 >= canvas_width) {
+      xBack1 = 0;
+    }
+    if (xBack2 >= canvas_width * 2) {
+      xBack2 = canvas_width;
+    }
+    if (xBack3 >= 0) {
+      xBack3 = -canvas_width;
+    }
 
     xBack1 += 3;
     xBack2 += 3;
@@ -96,15 +96,15 @@ function animate1() {
     // xMove += 3;
     frameYBat = 1;
 
-    // if (xBack1 <= -canvas_width) {
-    //   xBack1 = 0;
-    // }
-    // if (xBack2 <= 0) {
-    //   xBack2 = canvas_width;
-    // }
-    // if (xBack3 <= -canvas_width * 2) {
-    //   xBack3 = -canvas_width;
-    // }
+    if (xBack1 <= -canvas_width) {
+      xBack1 = 0;
+    }
+    if (xBack2 <= 0) {
+      xBack2 = canvas_width;
+    }
+    if (xBack3 <= -canvas_width * 2) {
+      xBack3 = -canvas_width;
+    }
     xBack1 -= 3;
     xBack2 -= 3;
     xBack3 -= 3;
