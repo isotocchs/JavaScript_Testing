@@ -52,6 +52,12 @@ let xBack2 = canvas_width;
 
 let xBack3 = -canvas_width;
 
+let xSquare = 350;
+let ySquare = 200;
+
+let Square_Width = 100;
+let Square_Height = 100;
+
 function animate1() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
 
@@ -91,6 +97,8 @@ function animate1() {
     xBack1 += 3;
     xBack2 += 3;
     xBack3 += 3;
+
+    xSquare += 3;
   }
   if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
     // xMove += 3;
@@ -105,12 +113,23 @@ function animate1() {
     if (xBack3 <= -canvas_width * 2) {
       xBack3 = -canvas_width;
     }
-    xBack1 -= 3;
-    xBack2 -= 3;
-    xBack3 -= 3;
+
+    if (
+      xBack1 >= -60 ||
+      yMove >= ySquare + Square_Height ||
+      yMove + canvas_height / 5 <= ySquare
+    ) {
+      xBack1 -= 3;
+      xBack2 -= 3;
+      xBack3 -= 3;
+
+      xSquare -= 3;
+    }
+    console.log("back1: " + xBack1);
+    console.log("Move1: " + xMove);
   }
 
-  // console.log("back1: " + xBack1);
+  console.log("back1: " + xBack1);
   // console.log("back2: " + xBack2);
   // console.log("back3: " + xBack3);
 
@@ -130,6 +149,8 @@ function animate1() {
     canvas_width / 5,
     canvas_height / 5
   );
+
+  bobContext.fillRect(xSquare, ySquare, Square_Width, Square_Height);
 
   gameFrame++;
   requestAnimationFrame(animate1);
