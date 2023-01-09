@@ -77,8 +77,12 @@ function animate1() {
     keyPressed === "ArrowDown" &&
     yMove <= canvas_height - canvas_height / 5
   ) {
-    yMove += 3;
+    if (yMove <= 96) {
+      yMove += 3;
+    }
+
     frameYBat = 0;
+    console.log("ymove: " + yMove);
   }
   if (keyPressed === "ArrowLeft" && xMove >= 0) {
     // xMove -= 3;
