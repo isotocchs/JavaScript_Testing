@@ -104,16 +104,6 @@ function animate1() {
     // xMove += 3;
     frameYBat = 1;
 
-    if (xBack1 <= -canvas_width) {
-      xBack1 = 0;
-    }
-    if (xBack2 <= 0) {
-      xBack2 = canvas_width;
-    }
-    if (xBack3 <= -canvas_width * 2) {
-      xBack3 = -canvas_width;
-    }
-
     if (
       xBack1 >= -60 ||
       yMove >= ySquare + Square_Height ||
@@ -125,11 +115,22 @@ function animate1() {
 
       xSquare -= 3;
     }
+
+    if (xBack1 <= -canvas_width) {
+      xBack1 = 0;
+    }
+    if (xBack2 <= 0) {
+      xBack2 = canvas_width;
+    }
+    if (xBack3 <= -canvas_width * 2) {
+      xBack3 = -canvas_width;
+    }
+
     console.log("back1: " + xBack1);
     console.log("Move1: " + xMove);
   }
 
-  console.log("back1: " + xBack1);
+  // console.log("back1: " + xBack1);
   // console.log("back2: " + xBack2);
   // console.log("back3: " + xBack3);
 
