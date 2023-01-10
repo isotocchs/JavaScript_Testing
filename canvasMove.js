@@ -77,14 +77,13 @@ function animate1() {
     keyPressed === "ArrowDown" &&
     yMove <= canvas_height - canvas_height / 5
   ) {
-    // if (yMove <= 75 || xSquare >= 305 || xSquare <= 80) {
-    yMove += 3;
-    // }
+    if (yMove <= 90 || yMove >= 190 || xSquare >= 300 || xSquare <= 70) {
+      yMove += 3;
+    }
 
     frameYBat = 0;
-    // console.log("ymove: " + yMove);
-    // console.log("xsquare " + xSquare);
-    // console.log("xback " + (xBack1 + canvas_width));
+    console.log("ymove: " + yMove);
+    console.log("xsquare " + xSquare);
   }
   if (keyPressed === "ArrowLeft" && xMove >= 0) {
     // xMove -= 3;
@@ -112,6 +111,7 @@ function animate1() {
 
     if (
       xBack1 >= -60 ||
+      xBack1 <= -280 ||
       yMove >= ySquare + Square_Height ||
       yMove + canvas_height / 5 <= ySquare
     ) {
