@@ -70,14 +70,18 @@ function animate1() {
   }
 
   if (keyPressed === "ArrowUp" && yMove >= 0) {
-    yMove -= 3;
+    if (xSquare >= 275 || yMove <= 97 || yMove >= 290 || xSquare <= 100) {
+      yMove -= 3;
+    }
     frameYBat = 2;
+    console.log("ymove: " + yMove);
+    console.log("xsquare " + xSquare);
   }
   if (
     keyPressed === "ArrowDown" &&
     yMove <= canvas_height - canvas_height / 5
   ) {
-    if (yMove <= 90 || yMove >= 190 || xSquare >= 300 || xSquare <= 70) {
+    if (xSquare >= 275 || yMove <= 95 || yMove >= 285 || xSquare <= 100) {
       yMove += 3;
     }
 
@@ -98,23 +102,22 @@ function animate1() {
     if (xBack3 >= 0) {
       xBack3 = -canvas_width;
     }
+    if (xSquare >= 275 || yMove <= 95 || yMove >= 290 || xSquare <= 100) {
+      xBack1 += 3;
+      xBack2 += 3;
+      xBack3 += 3;
 
-    xBack1 += 3;
-    xBack2 += 3;
-    xBack3 += 3;
+      xSquare += 3;
+    }
 
-    xSquare += 3;
+    console.log("xSquare: " + xSquare);
+    console.log("ymove: " + yMove);
   }
   if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
     // xMove += 3;
     frameYBat = 1;
 
-    if (
-      xBack1 >= -60 ||
-      xBack1 <= -280 ||
-      yMove >= ySquare + Square_Height ||
-      yMove + canvas_height / 5 <= ySquare
-    ) {
+    if (xSquare >= 280 || yMove <= 90 || yMove >= 300 || xSquare <= 115) {
       xBack1 -= 3;
       xBack2 -= 3;
       xBack3 -= 3;
@@ -132,8 +135,8 @@ function animate1() {
       xBack3 = -canvas_width;
     }
 
-    console.log("back1: " + xBack1);
-    // console.log("Move1: " + xMove);
+    console.log("xSquare: " + xSquare);
+    console.log("ymove: " + yMove);
   }
 
   // console.log("back1: " + xBack1);
