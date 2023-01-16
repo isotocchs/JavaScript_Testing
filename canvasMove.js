@@ -70,24 +70,25 @@ function animate1() {
   }
 
   if (keyPressed === "ArrowUp" && yMove >= 0) {
-    if (xSquare >= 275 || yMove <= 97 || yMove >= 290 || xSquare <= 100) {
+    if (yMove >= 290 || xSquare >= 300 || xSquare <= 80 || yMove <= 96) {
       yMove -= 3;
     }
     frameYBat = 2;
-    console.log("ymove: " + yMove);
-    console.log("xsquare " + xSquare);
+    console.log("y coordinates of the bat: " + yMove);
+    console.log("x coordinates of the square: " + xSquare);
   }
   if (
     keyPressed === "ArrowDown" &&
     yMove <= canvas_height - canvas_height / 5
   ) {
-    if (xSquare >= 275 || yMove <= 95 || yMove >= 285 || xSquare <= 100) {
+    if (yMove <= 95 || xSquare >= 300 || xSquare <= 90 || yMove >= 288) {
       yMove += 3;
     }
 
     frameYBat = 0;
-    console.log("ymove: " + yMove);
-    console.log("xsquare " + xSquare);
+
+    console.log("y coordinates of the bat: " + yMove);
+    console.log("x coordinates of the square: " + xSquare);
   }
   if (keyPressed === "ArrowLeft" && xMove >= 0) {
     // xMove -= 3;
@@ -110,18 +111,17 @@ function animate1() {
       xSquare += 3;
     }
 
-    console.log("xSquare: " + xSquare);
-    console.log("ymove: " + yMove);
+    console.log("y coordinates of the bat: " + yMove);
+    console.log("x coordinates of the square: " + xSquare);
   }
   if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
     // xMove += 3;
     frameYBat = 1;
 
-    if (xSquare >= 280 || yMove <= 90 || yMove >= 300 || xSquare <= 115) {
+    if (xSquare >= 285 || yMove <= 90 || yMove >= 300 || xSquare <= 101) {
       xBack1 -= 3;
       xBack2 -= 3;
       xBack3 -= 3;
-
       xSquare -= 3;
     }
 
@@ -134,9 +134,8 @@ function animate1() {
     if (xBack3 <= -canvas_width * 2) {
       xBack3 = -canvas_width;
     }
-
-    console.log("xSquare: " + xSquare);
-    console.log("ymove: " + yMove);
+    console.log("y coordinates of the bat: " + yMove);
+    console.log("x coordinates of the square: " + xSquare);
   }
 
   // console.log("back1: " + xBack1);
