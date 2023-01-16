@@ -1,3 +1,6 @@
+// Tell vs code you're working with canvas
+/** @type {HTMLCanvasElement} */
+
 const bob = document.getElementById("canvasE");
 // console.log(bob);
 const bobContext = bob.getContext("2d");
@@ -6,138 +9,91 @@ const bobContext = bob.getContext("2d");
 const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
-var keyPressed = "none";
+// lets make many enemies
+// const numberOfEnemies = 10;
+// const enemiesArray = [];
 
-window.addEventListener("keydown", function (e) {
-  if (
-    e.key === "ArrowUp" ||
-    e.key === "ArrowDown" ||
-    e.key === "ArrowRight" ||
-    e.key === "ArrowLeft"
-  ) {
-    keyPressed = e.key;
-  }
-  console.log(keyPressed);
-});
+//create enemy object
+const enemy1 = {
+  x: 10,
+  y: 50,
+  width: 100,
+  height: 100,
+};
 
-window.addEventListener("keyup", function (e) {
-  if (
-    e.key === "ArrowUp" ||
-    e.key === "ArrowDown" ||
-    e.key === "ArrowRight" ||
-    e.key === "ArrowLeft"
-  ) {
-    keyPressed = "none";
-  }
-  console.log(keyPressed);
-});
+// create enemy class - to produce multiple enemies
+// class Enemy {
+//   constructor() {
+//     //this keyword refers to the new object you are creating
+//     this.x = 10;
+//     this.y = 50;
+//     this.width = 100;
+//     this.height = 100;
+//     //lets make the initial position random instead
+//     // this.x = Math.random() * canvas_width;
+//     // this.y = Math.random() * canvas_height;
 
-let playerImage = new Image();
-playerImage.src = "bat-sprite.png";
-let spriteWidthBat = 128 / 4;
-let spriteHeightBat = 128 / 4;
-let frameXBat = 1;
-let frameYBat = 1;
-let gameFrame = 0;
-let stagerFramesBy = 10;
-let xMove = canvas_width / 2 - canvas_width / 5;
-let yMove = canvas_height / 2 - canvas_width / 5;
+//     //let change how fast the enemies move
+//     // this.speed = Math.random() * 4 - 2;
+//   }
+//   //classes can have custom methods.
+//   //Lets make one that changes the position of the enemies
+//   //instead of doing it by hand.
+//   update() {
+//     // this.x++;
+//     // this.y += 2;
 
-let backgroundImg = new Image();
-backgroundImg.src = "background.jpg";
+//     // lets use the speed to change the direction
+//     this.x += this.speed;
+//     this.y += this.speed;
+//   }
+//   //lets also make a draw method that lets us draw enemies easier.
+//   draw() {
+//     bobContext.fillRect(this.x, this.y, this.width, this.height);
 
-let xBack1 = 0;
+//     //draw the enemy sprite that you found online.
+//   }
+// }
 
-let xBack2 = canvas_width;
+//lets make an enemy object
+// const enemy1 = new Enemy();
 
-let xBack3 = -canvas_width;
+// lets make many enemies
+// for (let i = 0; i < numberOfEnemies; i++) {
+//   //push method takes whatever you give it and
+//   //pushes it to the end of the array
+//   enemiesArray.push(new Enemy());
+// }
+//use console.log to make sure that your loop and everything else is working
+// console.log(enemiesArray);
 
-function animate1() {
+function animate() {
+  // clean up the canvas
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
 
-  if (gameFrame % stagerFramesBy == 0) {
-    if (frameXBat < 3) {
-      frameXBat++;
-    } else {
-      frameXBat = 1;
-    }
-  }
+  //move enemy in x axis
+  enemy1.x += 0.5;
 
-  if (keyPressed === "ArrowUp" && yMove >= 0) {
-    yMove -= 3;
+  //move enemy in y axis
+  enemy1.y += 1.5;
 
-    frameYBat = 2;
-  }
-  if (
-    keyPressed === "ArrowDown" &&
-    yMove <= canvas_height - canvas_height / 5
-  ) {
-    yMove += 3;
+  //move enemy with update method instead. make sure to end it with () when you call it.
+  //enemy1.update();
 
-    frameYBat = 0;
-  }
-  if (keyPressed === "ArrowLeft" && xMove >= 0) {
-    // xMove -= 3;
-    frameYBat = 3;
+  //draw the enemy rect
+  bobContext.fillRect(enemy1.x, enemy1.y, enemy1.width, enemy1.height);
 
-    if (xBack1 >= canvas_width) {
-      xBack1 = 0;
-    }
-    if (xBack2 >= canvas_width * 2) {
-      xBack2 = canvas_width;
-    }
-    if (xBack3 >= 0) {
-      xBack3 = -canvas_width;
-    }
-    xBack1 += 3;
-    xBack2 += 3;
-    xBack3 += 3;
+  //draw enemy with the draw method instead.
+  //enemy1.draw();
 
-    xSquare += 3;
-  }
-  if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
-    // xMove += 3;
-    frameYBat = 1;
-
-    xBack1 -= 3;
-    xBack2 -= 3;
-    xBack3 -= 3;
-    xSquare -= 3;
-
-    if (xBack1 <= -canvas_width) {
-      xBack1 = 0;
-    }
-    if (xBack2 <= 0) {
-      xBack2 = canvas_width;
-    }
-    if (xBack3 <= -canvas_width * 2) {
-      xBack3 = -canvas_width;
-    }
-  }
-
-  // console.log("back1: " + xBack1);
-  // console.log("back2: " + xBack2);
-  // console.log("back3: " + xBack3);
-
-  bobContext.drawImage(backgroundImg, xBack1, 0, canvas_width, canvas_height);
-
-  bobContext.drawImage(backgroundImg, xBack2, 0, canvas_width, canvas_height);
-  bobContext.drawImage(backgroundImg, xBack3, 0, canvas_width, canvas_height);
-
-  bobContext.drawImage(
-    playerImage,
-    spriteWidthBat * frameXBat,
-    spriteHeightBat * frameYBat,
-    spriteWidthBat,
-    spriteHeightBat,
-    xMove,
-    yMove,
-    canvas_width / 5,
-    canvas_height / 5
-  );
-
-  gameFrame++;
-  requestAnimationFrame(animate1);
+  //use the forEach method to update and draw each enemy in the array.
+  //   enemiesArray.forEach((enemy) => {
+  //     enemy.update();
+  //     enemy.draw();
+  //   });
+  //create the infinate loop
+  requestAnimationFrame(animate);
 }
 
-animate1();
+//start the animation the first time.
+animate();
