@@ -13,13 +13,18 @@ const canvas_height = (bob.height = 600);
 // const numberOfEnemies = 10;
 // const enemiesArray = [];
 
+let enemyx = 10;
+let enemyy = 50;
+let enemyWidth = 100;
+let enemyHeight = 100;
+
 //create enemy object
-const enemy1 = {
-  x: 10,
-  y: 50,
-  width: 100,
-  height: 100,
-};
+// const enemy1 = {
+//   x: 10,
+//   y: 50,
+//   width: 100,
+//   height: 100,
+// };
 
 // create enemy class - to produce multiple enemies
 // class Enemy {
@@ -72,16 +77,16 @@ function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
 
   //move enemy in x axis
-  enemy1.x += 0.5;
+  enemyx += 0.5;
 
   //move enemy in y axis
-  enemy1.y += 1.5;
+  enemyy += 1.5;
 
   //move enemy with update method instead. make sure to end it with () when you call it.
   //enemy1.update();
 
   //draw the enemy rect
-  bobContext.fillRect(enemy1.x, enemy1.y, enemy1.width, enemy1.height);
+  bobContext.fillRect(enemyx, enemyy, enemyWidth, enemyHeight);
 
   //draw enemy with the draw method instead.
   //enemy1.draw();
