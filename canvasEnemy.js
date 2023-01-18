@@ -71,7 +71,7 @@ class Enemy {
 }
 
 //lets make an enemy object
-const enemyFromClass = new Enemy();
+const enemyObjectFromClass = new Enemy();
 
 // lets make many enemies
 // for (let i = 0; i < numberOfEnemies; i++) {
