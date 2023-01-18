@@ -13,10 +13,10 @@ const canvas_height = (bob.height = 600);
 // const numberOfEnemies = 10;
 // const enemiesArray = [];
 
-let enemyx = 10;
-let enemyy = 50;
-let enemyWidth = 100;
-let enemyHeight = 100;
+// let enemyx = 10;
+// let enemyy = 50;
+// let enemyWidth = 100;
+// let enemyHeight = 100;
 
 //create enemy object
 // const enemy1 = {
@@ -26,42 +26,52 @@ let enemyHeight = 100;
 //   height: 100,
 // };
 
+// const desk = {
+//   color: "brown",
+//   height: 10,
+//   numberOfLegs: 7,
+//   doesItHaveDrawers: false,
+//   width: 100,
+// };
+
+// // console.log(desk);
+
 // create enemy class - to produce multiple enemies
-// class Enemy {
-//   constructor() {
-//     //this keyword refers to the new object you are creating
-//     this.x = 10;
-//     this.y = 50;
-//     this.width = 100;
-//     this.height = 100;
-//     //lets make the initial position random instead
-//     // this.x = Math.random() * canvas_width;
-//     // this.y = Math.random() * canvas_height;
+class Enemy {
+  constructor() {
+    //this keyword refers to the new object you are creating
+    this.x = 10;
+    this.y = 50;
+    this.width = 100;
+    this.height = 100;
+    //lets make the initial position random instead
+    // this.x = Math.random() * canvas_width;
+    // this.y = Math.random() * canvas_height;
 
-//     //let change how fast the enemies move
-//     // this.speed = Math.random() * 4 - 2;
-//   }
-//   //classes can have custom methods.
-//   //Lets make one that changes the position of the enemies
-//   //instead of doing it by hand.
-//   update() {
-//     // this.x++;
-//     // this.y += 2;
+    //let change how fast the enemies move
+    // this.speed = Math.random() * 4 - 2;
+  }
+  //classes can have custom methods.
+  //Lets make one that changes the position of the enemies
+  //instead of doing it by hand.
+  update() {
+    this.x += 0.5;
+    this.y += 1;
 
-//     // lets use the speed to change the direction
-//     this.x += this.speed;
-//     this.y += this.speed;
-//   }
-//   //lets also make a draw method that lets us draw enemies easier.
-//   draw() {
-//     bobContext.fillRect(this.x, this.y, this.width, this.height);
+    // lets use the speed to change the direction
+    // this.x += this.speed;
+    // this.y += this.speed;
+  }
+  //lets also make a draw method that lets us draw enemies easier.
+  drawEnemy() {
+    bobContext.fillRect(this.x, this.y, this.width, this.height);
 
-//     //draw the enemy sprite that you found online.
-//   }
-// }
+    //draw the enemy sprite that you found online.
+  }
+}
 
 //lets make an enemy object
-// const enemy1 = new Enemy();
+const enemyFromClass = new Enemy();
 
 // lets make many enemies
 // for (let i = 0; i < numberOfEnemies; i++) {
@@ -77,16 +87,15 @@ function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
 
   //move enemy in x axis
-  enemyx += 0.5;
+  enemy1.x += 0.5;
 
   //move enemy in y axis
-  enemyy += 1.5;
-
+  enemy1.y += 1;
   //move enemy with update method instead. make sure to end it with () when you call it.
   //enemy1.update();
 
   //draw the enemy rect
-  bobContext.fillRect(enemyx, enemyy, enemyWidth, enemyHeight);
+  bobContext.fillRect(enemy1.x, enemy1.y, enemy1.width, enemy1.height);
 
   //draw enemy with the draw method instead.
   //enemy1.draw();
