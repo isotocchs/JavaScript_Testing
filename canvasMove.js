@@ -34,6 +34,7 @@ window.addEventListener("keyup", function (e) {
 
 let playerImage = new Image();
 playerImage.src = "bat-sprite.png";
+
 let spriteWidthBat = 128 / 4;
 let spriteHeightBat = 128 / 4;
 let frameXBat = 1;
