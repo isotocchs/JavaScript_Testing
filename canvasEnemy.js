@@ -18,11 +18,9 @@ playerImage.src = "bat-sprite.png";
 
 let spriteWidthBat = 128 / 4;
 let spriteHeightBat = 128 / 4;
-let frameXBat = 1;
-let frameYBat = 1;
 
 let gameFrame = 0;
-let stagerFramesBy = 10;
+let stagerFramesBy = 8;
 
 class EnemyBlueprint {
   constructor() {
@@ -31,24 +29,26 @@ class EnemyBlueprint {
     this.width = 100;
     this.height = 100;
     this.speed = Math.random() * 4 - 2;
+    this.frameXBat = 1;
+    this.frameYBat = 1;
   }
   updateMovement() {
     this.x += this.speed;
     this.y += this.speed;
 
     if (gameFrame % stagerFramesBy == 0) {
-      if (frameXBat < 3) {
-        frameXBat++;
+      if (this.frameXBat < 3) {
+        this.frameXBat++;
       } else {
-        frameXBat = 1;
+        this.frameXBat = 1;
       }
     }
   }
   drawEnemy() {
     bobContext.drawImage(
       playerImage,
-      spriteWidthBat * frameXBat,
-      spriteHeightBat * frameYBat,
+      spriteWidthBat * this.frameXBat,
+      spriteHeightBat * this.frameYBat,
       spriteWidthBat,
       spriteHeightBat,
       this.x,
