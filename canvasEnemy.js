@@ -10,7 +10,7 @@ const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
 // lets make many enemies
-const numberOfEnemies = 1000;
+const numberOfEnemies = 50;
 const enemiesArray = [];
 
 let playerImage = new Image();
@@ -21,19 +21,28 @@ let spriteHeightBat = 128 / 4;
 let frameXBat = 1;
 let frameYBat = 1;
 
-// create enemy class - to produce multiple enemies
+let gameFrame = 0;
+let stagerFramesBy = 10;
 
 class EnemyBlueprint {
   constructor() {
     this.x = Math.random() * canvas_width;
     this.y = Math.random() * canvas_height;
-    this.width = 50;
-    this.height = 50;
+    this.width = 100;
+    this.height = 100;
     this.speed = Math.random() * 4 - 2;
   }
   updateMovement() {
     this.x += this.speed;
     this.y += this.speed;
+
+    if (gameFrame % stagerFramesBy == 0) {
+      if (frameXBat < 3) {
+        frameXBat++;
+      } else {
+        frameXBat = 1;
+      }
+    }
   }
   drawEnemy() {
     bobContext.drawImage(
@@ -62,6 +71,7 @@ function animate() {
     enemies.drawEnemy();
   });
 
+  gameFrame++;
   requestAnimationFrame(animate);
 }
 animate();
