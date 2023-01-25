@@ -10,7 +10,7 @@ const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
 // lets make many enemies
-const numberOfEnemies = 50;
+const numberOfEnemies = 5;
 const enemiesArray = [];
 
 let playerImage = new Image();
@@ -19,21 +19,38 @@ playerImage.src = "bat-sprite.png";
 let spriteWidthBat = 128 / 4;
 let spriteHeightBat = 128 / 4;
 
+let directionX = 10;
+
 let gameFrame = 0;
-let stagerFramesBy = 8;
+let stagerFramesBy = 10;
 
 class EnemyBlueprint {
   constructor() {
-    this.x = Math.random() * canvas_width;
-    this.y = Math.random() * canvas_height;
     this.width = 100;
     this.height = 100;
+    this.x = Math.random() * (canvas_width - this.width);
+    this.y = Math.random() * (canvas_height - this.height);
     this.speed = Math.random() * 4 - 2;
     this.frameXBat = 1;
     this.frameYBat = 1;
   }
   updateMovement() {
-    this.x += this.speed;
+    if (this.x <= 0) {
+      this.speed *= -1;
+    }
+    if (this.x >= canvas_width - this.width) {
+      this.speed *= -1;
+    }
+    // if (this.y <= 0) {
+    //   this.speed *= -1;
+    // }
+    // if (this.y >= canvas_height - this.height) {
+    //   this.speed *= -1;
+    // }
+
+    console.log(this.speed);
+    console.log(this.x);
+    // this.x += this.speed;
     this.y += this.speed;
 
     if (gameFrame % stagerFramesBy == 0) {
