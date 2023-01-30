@@ -10,7 +10,7 @@ const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
 // lets make many enemies
-const numberOfEnemies = 5;
+const numberOfEnemies = 25;
 const enemiesArray = [];
 
 let playerImage = new Image();
@@ -22,7 +22,7 @@ let spriteHeightBat = 128 / 4;
 let directionX = 10;
 
 let gameFrame = 0;
-let stagerFramesBy = 10;
+let stagerFramesBy = 8;
 
 class EnemyBlueprint {
   constructor() {
@@ -30,35 +30,55 @@ class EnemyBlueprint {
     this.height = 100;
     this.x = Math.random() * (canvas_width - this.width);
     this.y = Math.random() * (canvas_height - this.height);
-    this.speed = Math.random() * 4 - 2;
+    this.speed = Math.random() * 4 + 1;
     this.frameXBat = 1;
-    this.frameYBat = 1;
+    this.frameYBat = 3;
+    this.famedir = "pos";
+
+    this.angle = 0;
+    this.frequencyChange = Math.random() * 4;
+    this.amplitude = Math.random() * 400;
   }
   updateMovement() {
-    if (this.x <= 0) {
-      this.speed *= -1;
+    if (this.x + this.width < 0) {
+      this.x = canvas_width;
     }
-    if (this.x >= canvas_width - this.width) {
-      this.speed *= -1;
-    }
-    // if (this.y <= 0) {
-    //   this.speed *= -1;
-    // }
-    // if (this.y >= canvas_height - this.height) {
-    //   this.speed *= -1;
-    // }
 
-    console.log(this.speed);
-    console.log(this.x);
-    // this.x += this.speed;
-    this.y += this.speed;
+    this.angle += this.frequencyChange;
+
+    this.x =
+      Math.cos((this.angle * Math.PI) / 180) * this.amplitude +
+      (canvas_width / 2 - this.width / 2);
+
+    this.y =
+      Math.sin((this.angle * Math.PI) / 180) * this.amplitude +
+      (canvas_height / 2 - this.height / 2);
+
+    // this.x =
+    //   (Math.cos((this.angle * Math.PI) / 90) * canvas_width) / 2 +
+    //   (canvas_width / 2 - this.width / 2);
+
+    // this.y =
+    //   (Math.sin((this.angle * Math.PI) / 270) * canvas_height) / 2 +
+    //   (canvas_height / 2 - this.height / 2);
 
     if (gameFrame % stagerFramesBy == 0) {
-      if (this.frameXBat < 3) {
-        this.frameXBat++;
-      } else {
-        this.frameXBat = 1;
+      if (this.frameXBat == 3) {
+        this.framedir = "neg";
+      } else if (this.frameXBat == 1) {
+        this.framedir = "pos";
       }
+      if (this.framedir == "pos") {
+        this.frameXBat++;
+      } else if (this.framedir == "neg") {
+        this.frameXBat--;
+      }
+      // if (this.frameXBat < 3) {
+      //   this.frameXBat++;
+      // } else {
+      //   this.frameXBat = 1;
+      // }
+      console.log(this.frameXBat);
     }
   }
   drawEnemy() {
