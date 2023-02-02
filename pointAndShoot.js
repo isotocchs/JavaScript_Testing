@@ -7,11 +7,11 @@ const bobContext = bob.getContext("2d");
 const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
-// const colCan = document.getElementById("collisionCanvas");
-// const colCanContext = colCan.getContext("2d");
+const colCan = document.getElementById("collisionCanvas");
+const colCanContext = colCan.getContext("2d");
 
-// const colCanvas_width = (colCan.width = 600);
-// const colCas_height = (colCan.height = 600);
+const colCanvas_width = (colCan.width = 600);
+const colCas_height = (colCan.height = 600);
 
 let canvasPosition = bob.getBoundingClientRect();
 const explosions = [];
@@ -29,8 +29,8 @@ let stagerFramesBy = 8;
 const numberOfEnemies = 10;
 const enemiesArray = [];
 
-let score = 0;
-bobContext.font = "30px Impact";
+// let score = 0;
+// bobContext.font = "30px Impact";
 
 //lets listen for a mouse click
 window.addEventListener("click", function (e) {
@@ -118,23 +118,23 @@ class EnemyBlueprint {
     this.frameYBat = 3;
     this.famedir = "pos";
 
+    this.randomColors = [
+      Math.floor(Math.random() * 255),
+      Math.floor(Math.random() * 255),
+      Math.floor(Math.random() * 255),
+    ];
+    this.color =
+      "rgb(" +
+      this.randomColors[0] +
+      "," +
+      this.randomColors[1] +
+      "," +
+      this.randomColors[2] +
+      ")";
+
     this.angle = 0;
     this.frequencyChange = Math.random() * 0.2;
     this.amplitude = Math.random() * 5;
-
-    // this.randomColors = [
-    //   Math.floor(Math.random() * 255),
-    //   Math.floor(Math.random() * 255),
-    //   Math.floor(Math.random() * 255),
-    // ];
-    // this.color =
-    //   "rgb(" +
-    //   this.randomColors[0] +
-    //   "," +
-    //   this.randomColors[1] +
-    //   "," +
-    //   this.randomColors[2] +
-    //   ")";
 
     // this.killed = false;
   }
@@ -142,7 +142,7 @@ class EnemyBlueprint {
     if (this.x + this.width < 0) {
       this.x = canvas_width;
     }
-    this.x -= this.speed;
+    this.x -= 0.01;
     this.y += Math.sin(this.angle) * this.amplitude;
     this.angle += this.frequencyChange;
 
@@ -168,8 +168,8 @@ class EnemyBlueprint {
   drawEnemy() {
     // bobContext.fillStyle = this.color;
     // bobContext.fillRect(this.x, this.y, this.width, this.height);
-    // colCanContext.fillStyle = this.color;
-    // colCanContext.fillRect(this.x, this.y, this.width, this.height);
+    colCanContext.fillStyle = this.color;
+    colCanContext.fillRect(this.x, this.y, this.width, this.height);
     bobContext.drawImage(
       playerImage,
       spriteWidthBat * this.frameXBat,
@@ -198,9 +198,9 @@ for (let index = 0; index < numberOfEnemies; index++) {
 
 function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
-  // colCanContext.clearRect(0, 0, canvas_width, canvas_height);
+  colCanContext.clearRect(0, 0, canvas_width, canvas_height);
 
-  bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
+  // bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
 
   // drawScore();
   enemiesArray.forEach((enemies) => {
