@@ -7,11 +7,11 @@ const bobContext = bob.getContext("2d");
 const canvas_width = (bob.width = 600);
 const canvas_height = (bob.height = 600);
 
-const colCan = document.getElementById("collisionCanvas");
-const colCanContext = colCan.getContext("2d");
+// const colCan = document.getElementById("collisionCanvas");
+// const colCanContext = colCan.getContext("2d");
 
-const colCanvas_width = (colCan.width = 600);
-const colCas_height = (colCan.height = 600);
+// const colCanvas_width = (colCan.width = 600);
+// const colCas_height = (colCan.height = 600);
 
 let canvasPosition = bob.getBoundingClientRect();
 const explosions = [];
@@ -39,24 +39,26 @@ window.addEventListener("click", function (e) {
   explosions.push(new Explosion(expPositionX, expPositionY));
 
   //lets do collision detection based on colors
-  const clickedPixelColor = colCanContext.getImageData(
-    expPositionX,
-    expPositionY,
-    1,
-    1
-  );
-  console.log(clickedPixelColor);
-  const colorData = clickedPixelColor.data;
-  enemiesArray.forEach((object) => {
-    if (
-      object.randomColors[0] === colorData[0] &&
-      object.randomColors[1] === colorData[1] &&
-      object.randomColors[2] === colorData[2]
-    ) {
-      object.killed = true;
-      score++;
-    }
-  });
+  // const clickedPixelColor = colCanContext.getImageData(
+  //   expPositionX,
+  //   expPositionY,
+  //   1,
+  //   1
+  // );
+  // console.log(clickedPixelColor);
+
+  // const colorData = clickedPixelColor.data;
+
+  // enemiesArray.forEach((object) => {
+  //   if (
+  //     object.randomColors[0] === colorData[0] &&
+  //     object.randomColors[1] === colorData[1] &&
+  //     object.randomColors[2] === colorData[2]
+  //   ) {
+  //     object.killed = true;
+  //     score++;
+  //   }
+  // });
 });
 
 class Explosion {
@@ -120,27 +122,27 @@ class EnemyBlueprint {
     this.frequencyChange = Math.random() * 0.2;
     this.amplitude = Math.random() * 5;
 
-    this.randomColors = [
-      Math.floor(Math.random() * 255),
-      Math.floor(Math.random() * 255),
-      Math.floor(Math.random() * 255),
-    ];
-    this.color =
-      "rgb(" +
-      this.randomColors[0] +
-      "," +
-      this.randomColors[1] +
-      "," +
-      this.randomColors[2] +
-      ")";
+    // this.randomColors = [
+    //   Math.floor(Math.random() * 255),
+    //   Math.floor(Math.random() * 255),
+    //   Math.floor(Math.random() * 255),
+    // ];
+    // this.color =
+    //   "rgb(" +
+    //   this.randomColors[0] +
+    //   "," +
+    //   this.randomColors[1] +
+    //   "," +
+    //   this.randomColors[2] +
+    //   ")";
 
-    this.killed = false;
+    // this.killed = false;
   }
   updateMovement() {
     if (this.x + this.width < 0) {
       this.x = canvas_width;
     }
-    this.x -= 0.1;
+    this.x -= this.speed;
     this.y += Math.sin(this.angle) * this.amplitude;
     this.angle += this.frequencyChange;
 
@@ -166,8 +168,8 @@ class EnemyBlueprint {
   drawEnemy() {
     // bobContext.fillStyle = this.color;
     // bobContext.fillRect(this.x, this.y, this.width, this.height);
-    colCanContext.fillStyle = this.color;
-    colCanContext.fillRect(this.x, this.y, this.width, this.height);
+    // colCanContext.fillStyle = this.color;
+    // colCanContext.fillRect(this.x, this.y, this.width, this.height);
     bobContext.drawImage(
       playerImage,
       spriteWidthBat * this.frameXBat,
@@ -187,25 +189,25 @@ for (let index = 0; index < numberOfEnemies; index++) {
 }
 
 //lets put a score up
-function drawScore() {
-  // bobContext.fillStyle = "white";
-  // bobContext.fillText("Score: " + score, 25, 50);
-  bobContext.fillStyle = "black";
-  bobContext.fillText("Score: " + score, 27, 52);
-}
+// function drawScore() {
+//   bobContext.fillStyle = "white";
+//   bobContext.fillText("Score: " + score, 25, 50);
+//   bobContext.fillStyle = "black";
+//   bobContext.fillText("Score: " + score, 27, 52);
+// }
 
 function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
-  colCanContext.clearRect(0, 0, canvas_width, canvas_height);
+  // colCanContext.clearRect(0, 0, canvas_width, canvas_height);
 
   bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
 
-  drawScore();
+  // drawScore();
   enemiesArray.forEach((enemies) => {
     enemies.updateMovement();
-    if (enemies.killed === false) {
-      enemies.drawEnemy();
-    }
+    // if (enemies.killed === false) {
+    enemies.drawEnemy();
+    // }
   });
 
   for (let i = 0; i < explosions.length; i++) {
