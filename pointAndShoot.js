@@ -26,11 +26,11 @@ let spriteHeightBat = 128 / 4;
 let gameFrame = 0;
 let stagerFramesBy = 8;
 
-const numberOfEnemies = 10;
+const numberOfEnemies = 20;
 const enemiesArray = [];
 
-// let score = 0;
-// bobContext.font = "30px Impact";
+let score = 0;
+bobContext.font = "30px Impact";
 
 //lets listen for a mouse click
 window.addEventListener("click", function (e) {
@@ -39,26 +39,26 @@ window.addEventListener("click", function (e) {
   explosions.push(new Explosion(expPositionX, expPositionY));
 
   //lets do collision detection based on colors
-  // const clickedPixelColor = colCanContext.getImageData(
-  //   expPositionX,
-  //   expPositionY,
-  //   1,
-  //   1
-  // );
-  // console.log(clickedPixelColor);
+  const clickedPixelColor = colCanContext.getImageData(
+    expPositionX,
+    expPositionY,
+    1,
+    1
+  );
+  console.log(clickedPixelColor);
 
-  // const colorData = clickedPixelColor.data;
+  const colorData = clickedPixelColor.data;
 
-  // enemiesArray.forEach((object) => {
-  //   if (
-  //     object.randomColors[0] === colorData[0] &&
-  //     object.randomColors[1] === colorData[1] &&
-  //     object.randomColors[2] === colorData[2]
-  //   ) {
-  //     object.killed = true;
-  //     score++;
-  //   }
-  // });
+  enemiesArray.forEach((enemyInfo) => {
+    if (
+      enemyInfo.randomColors[0] === colorData[0] &&
+      enemyInfo.randomColors[1] === colorData[1] &&
+      enemyInfo.randomColors[2] === colorData[2]
+    ) {
+      enemyInfo.killed = true;
+      score++;
+    }
+  });
 });
 
 class Explosion {
@@ -136,7 +136,7 @@ class EnemyBlueprint {
     this.frequencyChange = Math.random() * 0.2;
     this.amplitude = Math.random() * 5;
 
-    // this.killed = false;
+    this.killed = false;
   }
   updateMovement() {
     if (this.x + this.width < 0) {
@@ -157,12 +157,6 @@ class EnemyBlueprint {
       } else if (this.framedir == "neg") {
         this.frameXBat--;
       }
-      // if (this.frameXBat < 3) {
-      //   this.frameXBat++;
-      // } else {
-      //   this.frameXBat = 1;
-      // }
-      // console.log(this.frameXBat);
     }
   }
   drawEnemy() {
@@ -188,13 +182,13 @@ for (let index = 0; index < numberOfEnemies; index++) {
   enemiesArray.push(new EnemyBlueprint());
 }
 
-//lets put a score up
-// function drawScore() {
-//   bobContext.fillStyle = "white";
-//   bobContext.fillText("Score: " + score, 25, 50);
-//   bobContext.fillStyle = "black";
-//   bobContext.fillText("Score: " + score, 27, 52);
-// }
+// lets put a score up
+function drawScore() {
+  bobContext.fillStyle = "white";
+  bobContext.fillText("Score: " + score, 25, 50);
+  bobContext.fillStyle = "black";
+  bobContext.fillText("Score: " + score, 27, 52);
+}
 
 function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
@@ -205,9 +199,9 @@ function animate() {
   // drawScore();
   enemiesArray.forEach((enemies) => {
     enemies.updateMovement();
-    // if (enemies.killed === false) {
-    enemies.drawEnemy();
-    // }
+    if (enemies.killed === false) {
+      enemies.drawEnemy();
+    }
   });
 
   for (let i = 0; i < explosions.length; i++) {
