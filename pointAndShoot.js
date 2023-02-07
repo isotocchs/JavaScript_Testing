@@ -56,9 +56,13 @@ window.addEventListener("click", function (e) {
       enemyInfo.randomColors[2] === colorData[2]
     ) {
       enemyInfo.killed = true;
-      score++;
+      score += 2;
+    } else {
+      score -= 1 / numberOfEnemies;
     }
   });
+
+  score = Math.round(score);
 });
 
 class Explosion {
@@ -184,8 +188,8 @@ for (let index = 0; index < numberOfEnemies; index++) {
 
 // lets put a score up
 function drawScore() {
-  bobContext.fillStyle = "white";
-  bobContext.fillText("Score: " + score, 25, 50);
+  // bobContext.fillStyle = "white";
+  // bobContext.fillText("Score: " + score, 25, 50);
   bobContext.fillStyle = "black";
   bobContext.fillText("Score: " + score, 27, 52);
 }
@@ -196,7 +200,7 @@ function animate() {
 
   // bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
 
-  // drawScore();
+  drawScore();
   enemiesArray.forEach((enemies) => {
     enemies.updateMovement();
     if (enemies.killed === false) {
