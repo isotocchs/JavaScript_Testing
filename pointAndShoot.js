@@ -184,6 +184,7 @@ class EnemyBlueprint {
 
 for (let index = 0; index < numberOfEnemies; index++) {
   enemiesArray.push(new EnemyBlueprint());
+  console.log("enemies array size: " + enemiesArray.length);
 }
 
 // lets put a score up
@@ -198,13 +199,14 @@ function animate() {
   bobContext.clearRect(0, 0, canvas_width, canvas_height);
   colCanContext.clearRect(0, 0, canvas_width, canvas_height);
 
-  // bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
+  bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
 
   drawScore();
   enemiesArray.forEach((enemies) => {
     enemies.updateMovement();
     if (enemies.killed === false) {
       enemies.drawEnemy();
+      // console.log("point2");
     }
   });
 
