@@ -23,11 +23,20 @@ let playerImage = new Image();
 playerImage.src = "bat-sprite.png";
 let spriteWidthBat = 128 / 4;
 let spriteHeightBat = 128 / 4;
+
+let playerImage2 = new Image();
+playerImage2.src = "alien.png";
+let spriteWidthBat2 = 558 / 6;
+let spriteHeightBat2 = 632 / 4;
+
 let gameFrame = 0;
 let stagerFramesBy = 8;
 
 const numberOfEnemies = 20;
+const numberOfEnemies2 = 20;
+
 const enemiesArray = [];
+const enemiesArray2 = [];
 
 let score = 0;
 bobContext.font = "30px Impact";
@@ -181,9 +190,83 @@ class EnemyBlueprint {
   }
 }
 
+class EnemyBlueprint2 {
+  constructor() {
+    this.width = 100;
+    this.height = 100;
+    this.x = Math.random() * (canvas_width - this.width);
+    this.y = Math.random() * (canvas_height - this.height);
+    this.speed = Math.random() * 2 + 1;
+    this.frameXBat = 0;
+    this.frameYBat = 1;
+    this.famedir = "pos";
+
+    this.randomColors = [
+      Math.floor(Math.random() * 255),
+      Math.floor(Math.random() * 255),
+      Math.floor(Math.random() * 255),
+    ];
+    this.color =
+      "rgb(" +
+      this.randomColors[0] +
+      "," +
+      this.randomColors[1] +
+      "," +
+      this.randomColors[2] +
+      ")";
+
+    this.angle = 0;
+    this.frequencyChange = Math.random() * 0.2;
+    this.amplitude = Math.random() * 5;
+
+    this.killed = false;
+  }
+  updateMovement() {
+    if (this.x + this.width < 0) {
+      this.x = canvas_width;
+    }
+    this.x -= 0.01;
+    this.y += Math.sin(this.angle) * this.amplitude;
+    this.angle += this.frequencyChange;
+
+    if (gameFrame % stagerFramesBy == 0) {
+      if (this.frameXBat == 5) {
+        this.framedir = "neg";
+      } else if (this.frameXBat == 0) {
+        this.framedir = "pos";
+      }
+      if (this.framedir == "pos") {
+        this.frameXBat++;
+      } else if (this.framedir == "neg") {
+        this.frameXBat--;
+      }
+    }
+  }
+  drawEnemy() {
+    // bobContext.fillStyle = this.color;
+    // bobContext.fillRect(this.x, this.y, this.width, this.height);
+    colCanContext.fillStyle = this.color;
+    colCanContext.fillRect(this.x, this.y, this.width, this.height);
+    bobContext.drawImage(
+      playerImage2,
+      spriteWidthBat2 * this.frameXBat,
+      spriteHeightBat2 * this.frameYBat,
+      spriteWidthBat2,
+      spriteHeightBat2,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+}
+
 for (let index = 0; index < numberOfEnemies; index++) {
   enemiesArray.push(new EnemyBlueprint());
-  console.log("enemies array size: " + enemiesArray.length);
+}
+
+for (let index = 0; index < numberOfEnemies2; index++) {
+  enemiesArray2.push(new EnemyBlueprint2());
 }
 
 // lets put a score up
@@ -202,6 +285,13 @@ function animate() {
 
   drawScore();
   enemiesArray.forEach((enemies) => {
+    enemies.updateMovement();
+    if (enemies.killed === false) {
+      enemies.drawEnemy();
+      // console.log("point2");
+    }
+  });
+  enemiesArray2.forEach((enemies) => {
     enemies.updateMovement();
     if (enemies.killed === false) {
       enemies.drawEnemy();
