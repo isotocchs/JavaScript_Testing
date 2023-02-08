@@ -56,13 +56,12 @@ window.addEventListener("click", function (e) {
       enemyInfo.randomColors[2] === colorData[2]
     ) {
       enemyInfo.killed = true;
-      score += 2;
-    } else {
-      score -= 1 / numberOfEnemies;
+      score += 1;
     }
   });
-
-  score = Math.round(score);
+  if (0 === colorData[0] && 0 === colorData[1] && 0 === colorData[2]) {
+    score--;
+  }
 });
 
 class Explosion {
