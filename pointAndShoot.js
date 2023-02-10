@@ -35,8 +35,8 @@ let stagerFramesBy = 8;
 const numberOfEnemies = 20;
 const numberOfEnemies2 = 20;
 
-const enemiesArray = [];
-const enemiesArray2 = [];
+let enemiesArray = [];
+let enemiesArray2 = [];
 
 let score = 0;
 bobContext.font = "30px Impact";
@@ -54,7 +54,7 @@ window.addEventListener("click", function (e) {
     1,
     1
   );
-  console.log(clickedPixelColor);
+  console.log("X Pos: " + expPositionX + " Y Pos: " + expPositionY);
 
   const colorData = clickedPixelColor.data;
 
@@ -71,6 +71,11 @@ window.addEventListener("click", function (e) {
   if (0 === colorData[0] && 0 === colorData[1] && 0 === colorData[2]) {
     score--;
   }
+
+  // if (expPositionX > 500 && expPositionY < 55) {
+  //   score = 0;
+  //   enemiesArray = [];
+  // }
 });
 
 class Explosion {
@@ -190,84 +195,13 @@ class EnemyBlueprint {
   }
 }
 
-class EnemyBlueprint2 {
-  constructor() {
-    this.width = 100;
-    this.height = 100;
-    this.x = Math.random() * (canvas_width - this.width);
-    this.y = Math.random() * (canvas_height - this.height);
-    this.speed = Math.random() * 2 + 1;
-    this.frameXBat = 0;
-    this.frameYBat = 1;
-    this.famedir = "pos";
-
-    this.randomColors = [
-      Math.floor(Math.random() * 255),
-      Math.floor(Math.random() * 255),
-      Math.floor(Math.random() * 255),
-    ];
-    this.color =
-      "rgb(" +
-      this.randomColors[0] +
-      "," +
-      this.randomColors[1] +
-      "," +
-      this.randomColors[2] +
-      ")";
-
-    this.angle = 0;
-    this.frequencyChange = Math.random() * 0.2;
-    this.amplitude = Math.random() * 5;
-
-    this.killed = false;
-  }
-  updateMovement() {
-    if (this.x + this.width < 0) {
-      this.x = canvas_width;
-    }
-    this.x -= 0.01;
-    this.y += Math.sin(this.angle) * this.amplitude;
-    this.angle += this.frequencyChange;
-
-    if (gameFrame % stagerFramesBy == 0) {
-      if (this.frameXBat == 5) {
-        this.framedir = "neg";
-      } else if (this.frameXBat == 0) {
-        this.framedir = "pos";
-      }
-      if (this.framedir == "pos") {
-        this.frameXBat++;
-      } else if (this.framedir == "neg") {
-        this.frameXBat--;
-      }
-    }
-  }
-  drawEnemy() {
-    // bobContext.fillStyle = this.color;
-    // bobContext.fillRect(this.x, this.y, this.width, this.height);
-    colCanContext.fillStyle = this.color;
-    colCanContext.fillRect(this.x, this.y, this.width, this.height);
-    bobContext.drawImage(
-      playerImage2,
-      spriteWidthBat2 * this.frameXBat,
-      spriteHeightBat2 * this.frameYBat,
-      spriteWidthBat2,
-      spriteHeightBat2,
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
-  }
-}
-
 for (let index = 0; index < numberOfEnemies; index++) {
   enemiesArray.push(new EnemyBlueprint());
 }
 
-for (let index = 0; index < numberOfEnemies2; index++) {
-  enemiesArray2.push(new EnemyBlueprint2());
-}
+// for (let index = 0; index < numberOfEnemies2; index++) {
+//   enemiesArray2.push(new EnemyBlueprint2());
+// }
 
 // lets put a score up
 function drawScore() {
@@ -282,6 +216,12 @@ function animate() {
   colCanContext.clearRect(0, 0, canvas_width, canvas_height);
 
   bobContext.drawImage(backgroundImg, 0, 0, canvas_width, canvas_height);
+
+  bobContext.fillStyle = "blue";
+  bobContext.fillRect(canvas_width - 100, 0, 100, 50);
+
+  // bobContext.fillStyle = "red";
+  // bobContext.fillText("Reset", canvas_width - 85, 35);
 
   drawScore();
   enemiesArray.forEach((enemies) => {
