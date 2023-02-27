@@ -115,6 +115,17 @@ window.addEventListener("click", function (e) {
       score += 1;
     }
   });
+
+  enemiesArray2.forEach((enemyInfo) => {
+    if (
+      enemyInfo.randomColors[0] === colorData[0] &&
+      enemyInfo.randomColors[1] === colorData[1] &&
+      enemyInfo.randomColors[2] === colorData[2]
+    ) {
+      enemyInfo.killed = true;
+      score += 1;
+    }
+  });
   if (0 === colorData[0] && 0 === colorData[1] && 0 === colorData[2]) {
     score--;
   }
@@ -240,17 +251,19 @@ class EnemyBlueprint {
 
     //lets make circles for collision detection
     // .arc( x-coord, y-coord, radius, stargin angle, ending angle)
-    bobContext.beginPath();
-    bobContext.arc(
-      this.x + this.width / 2,
-      this.y + this.height / 2,
-      this.width / 2.5,
-      0,
-      Math.PI * 2
-    );
-    bobContext.stroke();
+
+    // bobContext.beginPath();
+    // bobContext.arc(
+    //   this.x + this.width / 2,
+    //   this.y + this.height / 2,
+    //   this.width / 2.5,
+    //   0,
+    //   Math.PI * 2
+    // );
+    // bobContext.stroke();
+
     bobContext.drawImage(
-      playerImage2,
+      playerImage,
       spriteWidthBat * this.frameXBat,
       spriteHeightBat * this.frameYBat,
       spriteWidthBat,
@@ -323,18 +336,19 @@ class EnemyBlueprint2 {
 
     //lets make circles for collision detection
     // .arc( x-coord, y-coord, radius, stargin angle, ending angle)
-    bobContext.beginPath();
-    bobContext.arc(
-      this.x + this.width / 2,
-      this.y + this.height / 2,
-      this.width / 2.5,
-      0,
-      Math.PI * 2
-    );
-    bobContext.stroke();
+
+    // bobContext.beginPath();
+    // bobContext.arc(
+    //   this.x + this.width / 2,
+    //   this.y + this.height / 2,
+    //   this.width / 2.5,
+    //   0,
+    //   Math.PI * 2
+    // );
+    // bobContext.stroke();
 
     bobContext.drawImage(
-      playerImage,
+      playerImage2,
       spriteWidthBat2 * this.frameXBat,
       spriteHeightBat2 * this.frameYBat,
       spriteWidthBat2,
@@ -430,9 +444,9 @@ function animate() {
     xMove += 3;
   }
 
-  bobContext.beginPath();
-  bobContext.arc(xMove + 100 / 2, yMove + 100 / 2, 100 / 2, 0, Math.PI * 2);
-  bobContext.stroke();
+  // bobContext.beginPath();
+  // bobContext.arc(xMove + 100 / 2, yMove + 100 / 2, 100 / 2, 0, Math.PI * 2);
+  // bobContext.stroke();
   bobContext.drawImage(
     playerKnight,
     0,
@@ -445,7 +459,7 @@ function animate() {
     100
   );
 
-  calcCollision(xMove, yMove);
+  // calcCollision(xMove, yMove);
 
   for (let i = 0; i < explosions.length; i++) {
     explosions[i].update();
