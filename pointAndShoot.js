@@ -29,17 +29,61 @@ playerImage2.src = "alien.png";
 let spriteWidthBat2 = 558 / 6;
 let spriteHeightBat2 = 632 / 4;
 
+let playerKnight = new Image();
+playerKnight.src = "simpleKnight.png";
+let spriteWidthKnight = 291;
+let spriteHeightKnight = 362;
+
 let gameFrame = 0;
 let stagerFramesBy = 8;
 
-const numberOfEnemies = 20;
-const numberOfEnemies2 = 20;
+const numberOfEnemies = 10;
+const numberOfEnemies2 = 10;
 
 let enemiesArray = [];
 let enemiesArray2 = [];
 
 let score = 0;
 bobContext.font = "30px Impact";
+
+var keyPressed = "none";
+
+let xMove = canvas_width / 2;
+let yMove = canvas_height - 100;
+
+window.addEventListener("keydown", function (e) {
+  if (
+    e.key === "ArrowUp" ||
+    e.key === "ArrowDown" ||
+    e.key === "ArrowRight" ||
+    e.key === "ArrowLeft"
+  ) {
+    keyPressed = e.key;
+  }
+  console.log(enemiesArray.length);
+  console.log(keyPressed);
+});
+
+window.addEventListener("keyup", function (e) {
+  if (
+    e.key === "ArrowUp" ||
+    e.key === "ArrowDown" ||
+    e.key === "ArrowRight" ||
+    e.key === "ArrowLeft"
+  ) {
+    keyPressed = "none";
+  }
+  console.log(keyPressed);
+});
+
+let explosionSoundHit = new Audio("explosionSound.wav");
+explosionSoundHit.volume = 0.3;
+
+explosionSoundHit.load();
+explosionSoundHit.play();
+
+// let explosionSoundMiss = new Audio("explosionSound2.wav");
+// explosionSoundMiss.volume = 0.3;
 
 //lets listen for a mouse click
 window.addEventListener("click", function (e) {
@@ -58,6 +102,9 @@ window.addEventListener("click", function (e) {
 
   const colorData = clickedPixelColor.data;
 
+  explosionSoundHit.load();
+  explosionSoundHit.play();
+
   enemiesArray.forEach((enemyInfo) => {
     if (
       enemyInfo.randomColors[0] === colorData[0] &&
@@ -72,10 +119,19 @@ window.addEventListener("click", function (e) {
     score--;
   }
 
-  // if (expPositionX > 500 && expPositionY < 55) {
-  //   score = 0;
-  //   enemiesArray = [];
-  // }
+  if (expPositionX > 500 && expPositionY < 55) {
+    score = 0;
+    enemiesArray = [];
+
+    for (let index = 0; index < numberOfEnemies; index++) {
+      enemiesArray.push(new EnemyBlueprint());
+    }
+    enemiesArray2 = [];
+
+    for (let index = 0; index < numberOfEnemies2; index++) {
+      enemiesArray2.push(new EnemyBlueprint2());
+    }
+  }
 });
 
 class Explosion {
@@ -129,7 +185,7 @@ class EnemyBlueprint {
     this.width = 100;
     this.height = 100;
     this.x = Math.random() * (canvas_width - this.width);
-    this.y = Math.random() * (canvas_height - this.height);
+    this.y = Math.random() * (canvas_height - this.height - 200);
     this.speed = Math.random() * 2 + 1;
     this.frameXBat = 1;
     this.frameYBat = 3;
@@ -151,7 +207,7 @@ class EnemyBlueprint {
 
     this.angle = 0;
     this.frequencyChange = Math.random() * 0.2;
-    this.amplitude = Math.random() * 5;
+    this.amplitude = Math.random() * 2;
 
     this.killed = false;
   }
@@ -181,8 +237,20 @@ class EnemyBlueprint {
     // bobContext.fillRect(this.x, this.y, this.width, this.height);
     colCanContext.fillStyle = this.color;
     colCanContext.fillRect(this.x, this.y, this.width, this.height);
+
+    //lets make circles for collision detection
+    // .arc( x-coord, y-coord, radius, stargin angle, ending angle)
+    bobContext.beginPath();
+    bobContext.arc(
+      this.x + this.width / 2,
+      this.y + this.height / 2,
+      this.width / 2.5,
+      0,
+      Math.PI * 2
+    );
+    bobContext.stroke();
     bobContext.drawImage(
-      playerImage,
+      playerImage2,
       spriteWidthBat * this.frameXBat,
       spriteHeightBat * this.frameYBat,
       spriteWidthBat,
@@ -195,13 +263,97 @@ class EnemyBlueprint {
   }
 }
 
+class EnemyBlueprint2 {
+  constructor() {
+    this.width = 100;
+    this.height = 100;
+    this.x = Math.random() * (canvas_width - this.width);
+    this.y = Math.random() * (canvas_height - this.height - 200);
+    this.speed = Math.random() * 2 + 1;
+    this.frameXBat = 1;
+    this.frameYBat = 3;
+    this.famedir = "pos";
+
+    this.randomColors = [
+      Math.floor(Math.random() * 255),
+      Math.floor(Math.random() * 255),
+      Math.floor(Math.random() * 255),
+    ];
+    this.color =
+      "rgb(" +
+      this.randomColors[0] +
+      "," +
+      this.randomColors[1] +
+      "," +
+      this.randomColors[2] +
+      ")";
+
+    this.angle = 0;
+    this.frequencyChange = Math.random() * 0.2;
+    this.amplitude = Math.random() * 2;
+
+    this.killed = false;
+  }
+  updateMovement() {
+    if (this.x + this.width < 0) {
+      this.x = canvas_width;
+    }
+    this.x -= 0.01;
+    this.y += Math.sin(this.angle) * this.amplitude;
+    this.angle += this.frequencyChange;
+
+    if (gameFrame % stagerFramesBy == 0) {
+      if (this.frameXBat == 3) {
+        this.framedir = "neg";
+      } else if (this.frameXBat == 1) {
+        this.framedir = "pos";
+      }
+      if (this.framedir == "pos") {
+        this.frameXBat++;
+      } else if (this.framedir == "neg") {
+        this.frameXBat--;
+      }
+    }
+  }
+  drawEnemy() {
+    // bobContext.fillStyle = this.color;
+    // bobContext.fillRect(this.x, this.y, this.width, this.height);
+    colCanContext.fillStyle = this.color;
+    colCanContext.fillRect(this.x, this.y, this.width, this.height);
+
+    //lets make circles for collision detection
+    // .arc( x-coord, y-coord, radius, stargin angle, ending angle)
+    bobContext.beginPath();
+    bobContext.arc(
+      this.x + this.width / 2,
+      this.y + this.height / 2,
+      this.width / 2.5,
+      0,
+      Math.PI * 2
+    );
+    bobContext.stroke();
+
+    bobContext.drawImage(
+      playerImage,
+      spriteWidthBat2 * this.frameXBat,
+      spriteHeightBat2 * this.frameYBat,
+      spriteWidthBat2,
+      spriteHeightBat2,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+}
+
 for (let index = 0; index < numberOfEnemies; index++) {
   enemiesArray.push(new EnemyBlueprint());
 }
 
-// for (let index = 0; index < numberOfEnemies2; index++) {
-//   enemiesArray2.push(new EnemyBlueprint2());
-// }
+for (let index = 0; index < numberOfEnemies2; index++) {
+  enemiesArray2.push(new EnemyBlueprint2());
+}
 
 // lets put a score up
 function drawScore() {
@@ -209,6 +361,28 @@ function drawScore() {
   // bobContext.fillText("Score: " + score, 25, 50);
   bobContext.fillStyle = "black";
   bobContext.fillText("Score: " + score, 27, 52);
+}
+
+//lets calculate collision detection for the circles
+function calcCollision(playerX, playerY) {
+  enemiesArray.forEach((enemy) => {
+    const distX = enemy.x - playerX;
+    const distY = enemy.y - playerY;
+    const distance = Math.sqrt(distX * distX + distY * distY);
+    if (distance < enemy.width / 2.5 + 100 / 2) {
+      enemiesArray.splice(enemiesArray.indexOf(enemy), 1);
+      score += 1;
+    }
+  });
+  enemiesArray2.forEach((enemy) => {
+    const distX = enemy.x - playerX;
+    const distY = enemy.y - playerY;
+    const distance = Math.sqrt(distX * distX + distY * distY);
+    if (distance < enemy.width / 2.5 + 100 / 2) {
+      enemiesArray2.splice(enemiesArray2.indexOf(enemy), 1);
+      score += 1;
+    }
+  });
 }
 
 function animate() {
@@ -220,8 +394,8 @@ function animate() {
   bobContext.fillStyle = "blue";
   bobContext.fillRect(canvas_width - 100, 0, 100, 50);
 
-  // bobContext.fillStyle = "red";
-  // bobContext.fillText("Reset", canvas_width - 85, 35);
+  bobContext.fillStyle = "red";
+  bobContext.fillText("Reset", canvas_width - 85, 35);
 
   drawScore();
   enemiesArray.forEach((enemies) => {
@@ -231,6 +405,7 @@ function animate() {
       // console.log("point2");
     }
   });
+
   enemiesArray2.forEach((enemies) => {
     enemies.updateMovement();
     if (enemies.killed === false) {
@@ -238,6 +413,39 @@ function animate() {
       // console.log("point2");
     }
   });
+
+  if (keyPressed === "ArrowUp" && yMove >= 0) {
+    yMove -= 3;
+  }
+  if (
+    keyPressed === "ArrowDown" &&
+    yMove <= canvas_height - canvas_height / 5
+  ) {
+    yMove += 3;
+  }
+  if (keyPressed === "ArrowLeft" && xMove >= 0) {
+    xMove -= 3;
+  }
+  if (keyPressed === "ArrowRight" && xMove <= canvas_width - canvas_width / 5) {
+    xMove += 3;
+  }
+
+  bobContext.beginPath();
+  bobContext.arc(xMove + 100 / 2, yMove + 100 / 2, 100 / 2, 0, Math.PI * 2);
+  bobContext.stroke();
+  bobContext.drawImage(
+    playerKnight,
+    0,
+    0,
+    spriteWidthKnight,
+    spriteHeightKnight,
+    xMove,
+    yMove,
+    100,
+    100
+  );
+
+  calcCollision(xMove, yMove);
 
   for (let i = 0; i < explosions.length; i++) {
     explosions[i].update();
